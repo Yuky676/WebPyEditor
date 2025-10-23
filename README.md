@@ -10,3 +10,7 @@ webブラウザで実行できるpythonエディタと実行環境です
 
 
 ## 構築手順
+```aiignore
+docker build -t py-editor .
+docker run -d -p 28888:8888 -p 20022:22 --name py-editor-container py-editor
+```

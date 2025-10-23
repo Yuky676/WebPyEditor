@@ -25,7 +25,6 @@ RUN ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
 
 # --- Webコンテンツ配置 ---
 RUN mkdir -p /opt/app
-COPY /var/www/html/index.nginx-debian.html /opt/app/
 
 # --- ユーザー設定 ---
 RUN echo "root:root" | chpasswd
