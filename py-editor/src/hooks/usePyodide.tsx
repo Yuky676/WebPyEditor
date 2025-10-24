@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import type { PyodideInterface } from 'pyodide';
 import { loadPyodide } from 'pyodide';
+import packagesToLoad from '../setting/pyodide-packages.json';
 
 // このフックが外部に提供する値の型
 interface UsePyodideReturn {
@@ -42,16 +43,7 @@ export const usePyodide = (): UsePyodideReturn => {
 
                 pyodideRef.current = pyodide;
 
-                setOutput("Loading package list...");
-
-                // 1. publicフォルダから設定ファイルを取得
-                const response = await fetch('/pyodide-packages.json');
-                if (!response.ok) {
-                    throw new Error(`Failed to fetch package list: ${response.statusText}`);
-                }
-                const packagesToLoad: string[] = await response.json();
-
-                // 2. リストにあるパッケージをロード
+                // リストにあるパッケージをロード
                 if (packagesToLoad.length > 0) {
                     setOutput(`Loading packages: ${packagesToLoad.join(', ')}...`);
                     // loadPackageにはパッケージ名の配列を渡すことができます
